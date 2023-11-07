@@ -1,7 +1,7 @@
 const sections = document.querySelectorAll('.section');
 const sectBtns = document.querySelectorAll('.controls');
 const sectBtn = document.querySelectorAll('.control');
-const allSections = document.querySelectorAll('.main-content');
+const allSections = document.querySelector('.main-content');
 
 function PageTransition(){
     //Button click actice class
@@ -13,6 +13,26 @@ function PageTransition(){
 
         })
     }
+
+    // Sections Active class
+    allSections.addEventListener('click', (e) => {
+        const id = e.target.dataset.id;
+        if (id){
+            //remove selected from the other buttons
+            sectBtns.forEach((btn) => {
+                btn.classList.remove('active')
+            });
+            e.target.classList.add('active')
+
+            // hide other sections
+            sections.forEach((section) => {
+                section.classList.remove('active')
+            });
+
+            const element = document.getElementById(id);
+            element.classList.add('active')
+        }
+    });
 }
 
 PageTransition();
